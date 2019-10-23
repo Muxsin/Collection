@@ -1,7 +1,7 @@
 <?php 
 
 class Collection {
-    protected $data = [1,2,3,2,6,5,3,4];
+    protected $data = [1,2,3,2,6,5,3,4,7];
 
     /*  
     --> Return all elements from array  
@@ -25,11 +25,8 @@ class Collection {
                 $arr_values[] = $key;
             }
         }
-        if (empty($arr_values)) {
-            return -1;
-        } else {
-            return $arr_values;
-        }
+        
+        return $arr_values;
     }
 
     /*  
@@ -60,8 +57,37 @@ class Collection {
         $arr = $this->data;
         return in_array($value,$arr);
     }
+
+    /*
+    --> Count all elements in an array
+    */
+    public function count() {
+        $arr = $this->data;
+        return count($arr);
+    }
+    
+    public function prepend($value) {
+        $arr = $this->data;
+        $arr1[] = $value;
+        return array_merge($arr1, $arr);
+    }
+
+    public function append($value) {
+        $arr = $this->data;
+        $arr1[] = $value;
+        return array_merge($arr, $arr1);
+    }
+
+    static function collect($array) {
+        $collect = new Collection;
+        $array = $collect->data;
+        return $collect;
+    }
 }
 
+// Checking
+
 $coll = new Collection;
-var_dump("[1,2,3,2,6,5,3,4]");
-var_dump($coll->has(3));
+var_dump($coll::collect([1,2,3])->has(2));
+var_dump('[1,2,3,2,6,5,3,4,7]');
+var_dump($coll->append(8));
